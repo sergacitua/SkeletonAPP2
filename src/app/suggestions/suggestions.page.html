@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Sugerencias y Ofertas!</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Sección de Sugerencias -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Sugerencias de Destinos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let suggestion of suggestions">
+          <ion-thumbnail slot="start">
+            <img [src]="suggestion.image">
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ suggestion.title }}</h2>
+            <p>{{ suggestion.description }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Sección de Ofertas Especiales -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Ofertas Especiales</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let offer of offers">
+          <ion-thumbnail slot="start">
+            <img [src]="offer.image">
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ offer.title }}</h2>
+            <p>{{ offer.description }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

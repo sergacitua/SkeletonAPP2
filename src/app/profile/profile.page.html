@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Información del Usuario</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="assets/avatar.jpg" alt="Avatar del usuario">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ user.name }}</h2>
+          <p>{{ user.email }}</p>
+          <p>{{ user.phone }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Historial de Viajes</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let trip of user.travelHistory">
+          <ion-thumbnail slot="start"> 
+            <img [src]="trip.image" alt="{{ trip.destination }}">
+          </ion-thumbnail>
+          <ion-label>
+            <h3>{{ trip.destination }}</h3>
+            <p>{{ trip.date }}</p>
+            <p>{{ trip.description }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Preferencias</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let preference of user.preferences">
+          <ion-label>
+            <h3>{{ preference.title }}</h3>
+            <p>{{ preference.description }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Comunidad</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Sección de Reseñas -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Reseñas de otros viajeros</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let review of reviews">
+          <ion-avatar slot="start">
+            <img [src]="review.avatar">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ review.name }}</h2>
+            <p>{{ review.comment }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Sección de Foros de Discusión -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Foros de Discusión</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let forum of forums" (click)="openForum(forum)">
+          <ion-label>
+            <h2>{{ forum.title }}</h2>
+            <p>{{ forum.description }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Sección de Recomendaciones -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Recomendaciones</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let recommendation of recommendations">
+          <ion-label>
+            <h2>{{ recommendation.title }}</h2>
+            <p>{{ recommendation.detail }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

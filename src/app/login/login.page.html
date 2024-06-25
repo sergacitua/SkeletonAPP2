@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input formControlName="username" type="text"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="loginForm.get('username')?.invalid && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched)">
+      <ion-text color="danger">
+        <p *ngIf="loginForm.get('username')?.errors?.['required']">El campo es requerido.</p>
+        <p *ngIf="loginForm.get('username')?.errors?.['minlength']">Debe tener al menos 3 caracteres.</p>
+        <p *ngIf="loginForm.get('username')?.errors?.['maxlength']">No debe exceder 8 caracteres.</p>
+      </ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input formControlName="password" type="password"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+      <ion-text color="danger">
+        <p *ngIf="loginForm.get('password')?.errors?.['required']">El campo es requerido.</p>
+        <p *ngIf="loginForm.get('password')?.errors?.['pattern']">Debe ser un número de 4 dígitos.</p>
+      </ion-text>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="loginForm.invalid">Ingresar</ion-button>
+  </form>
+
+  <ion-button expand="full" color="secondary" routerLink="/create-profile">Crear Perfil</ion-button>
+</ion-content>

@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Crear Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="createProfileForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input formControlName="username" type="text"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="createProfileForm.get('username')?.invalid && (createProfileForm.get('username')?.dirty || createProfileForm.get('username')?.touched)">
+      <ion-text color="danger">
+        <p *ngIf="createProfileForm.get('username')?.errors?.['required']">El campo es requerido.</p>
+        <p *ngIf="createProfileForm.get('username')?.errors?.['minlength']">Debe tener al menos 3 caracteres.</p>
+        <p *ngIf="createProfileForm.get('username')?.errors?.['maxlength']">No debe exceder 8 caracteres.</p>
+      </ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input formControlName="password" type="password"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="createProfileForm.get('password')?.invalid && (createProfileForm.get('password')?.dirty || createProfileForm.get('password')?.touched)">
+      <ion-text color="danger">
+        <p *ngIf="createProfileForm.get('password')?.errors?.['required']">El campo es requerido.</p>
+        <p *ngIf="createProfileForm.get('password')?.errors?.['pattern']">Debe ser un número de 4 dígitos.</p>
+      </ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Correo Electrónico</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="createProfileForm.get('email')?.invalid && (createProfileForm.get('email')?.dirty || createProfileForm.get('email')?.touched)">
+      <ion-text color="danger">
+        <p *ngIf="createProfileForm.get('email')?.errors?.['required']">El campo es requerido.</p>
+        <p *ngIf="createProfileForm.get('email')?.errors?.['email']">Debe ser un correo electrónico válido.</p>
+      </ion-text>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="createProfileForm.invalid">Crear Perfil</ion-button>
+  </form>
+</ion-content>
