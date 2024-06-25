@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@capacitor/geolocation';
 import { AlertController, AnimationController, NavController } from '@ionic/angular';
+import { ApiService } from 'src/app/api.service';
+import { LocalDatabaseService } from 'src/app/local-database.service';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +32,7 @@ export class HomePage implements OnInit {
   infoForm: FormGroup;
   latitude: number | null = null;
   longitude: number | null = null;
+  profiles: any;
 
   @ViewChild('firstNameInput', { static: false }) firstNameInput!: ElementRef;
   @ViewChild('lastNameInput', { static: false }) lastNameInput!: ElementRef;
@@ -39,7 +42,9 @@ export class HomePage implements OnInit {
     private formBuilder: FormBuilder,
     private alertController: AlertController,
     private animationCtrl: AnimationController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private apiService: ApiService,
+    private localDB: LocalDatabaseService
   ) {
     this.infoForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -54,6 +59,7 @@ export class HomePage implements OnInit {
       this.username = params['username'];
     });
     this.getCurrentLocation();
+    this.loadProfiles();
   }
 
   async getCurrentLocation() {
@@ -63,6 +69,21 @@ export class HomePage implements OnInit {
       this.longitude = coordinates.coords.longitude;
     } catch (error) {
       console.log('Error getting location', error);
+    }
+  }
+
+  async loadProfiles() {
+    if (navigator.onLine) {
+      this.apiService.getProfiles().subscribe(
+        data => {
+          this.profiles = data;
+        },
+        error => {
+          console.error('Error fetching profiles', error);
+        }
+      );
+    } else {
+      this.profiles = await this.localDB.getData('profiles');
     }
   }
 
